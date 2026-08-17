@@ -68,7 +68,7 @@ val ViskotuTypography = Typography(
         lineHeight = 20.sp,
         color = ViskotuColors.Neutral900
     ),
-    // Label Medium (Over-titles like `SEEPRA FOR SPACES`)
+    // Label Medium (Over-titles like `Viskotu FOR SPACES`)
     labelMedium = TextStyle(
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Bold,

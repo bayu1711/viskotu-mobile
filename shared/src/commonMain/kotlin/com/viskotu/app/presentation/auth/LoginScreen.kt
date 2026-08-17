@@ -33,7 +33,7 @@ import com.viskotu.app.designsystem.ViskotuColors
 import com.viskotu.app.designsystem.ViskotuTypography
 
 /**
- * Pixel-Perfect Login Screen matching the Seepra for Spaces / Viskotu Prototype.
+ * Pixel-Perfect Login Screen matching the Viskotu for Spaces / Viskotu Prototype.
  * Demonstrates clean MVI handling, custom design token integration (`tokens.ts`),
  * and enterprise password security UX.
  */
@@ -64,9 +64,9 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(28.dp))
 
-            // Over-Title: SEEPRA FOR SPACES
+            // Over-Title: Viskotu FOR SPACES
             Text(
-                text = "SEEPRA FOR SPACES",
+                text = "Viskotu FOR SPACES",
                 style = ViskotuTypography.labelMedium,
                 color = ViskotuColors.Primary600
             )

@@ -1,0 +1,79 @@
+--- gradle/libs.versions.toml
++++ gradle/libs.versions.toml
+@@ -14,6 +14,10 @@
+ kotlin = "2.4.0"
+ kotlinx-coroutines = "1.11.0"
+ material3 = "1.11.0-alpha07"
++androidx-navigation = "2.8.0-alpha10"
++ktor = "3.0.1"
++koin = "4.0.0"
++kotlinx-serialization = "1.7.3"
+ 
+ [libraries]
+@@ -34,6 +34,24 @@
+ 
++# Navigation
++androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
++
++# Ktor
++ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
++ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
++ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
++ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
++ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
++
++# Koin
++koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
++koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
++koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
++
++# Serialization
++kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
++
+ [plugins]
+@@ -40,3 +40,4 @@
+-kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
++kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
++kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+--- shared/build.gradle.kts
++++ shared/build.gradle.kts
+@@ -5,6 +5,7 @@
+     alias(libs.plugins.androidMultiplatformLibrary)
+     alias(libs.plugins.composeMultiplatform)
+     alias(libs.plugins.composeCompiler)
++    alias(libs.plugins.kotlin.serialization)
+ }
+ 
+@@ -38,6 +38,7 @@
+     sourceSets {
+         androidMain.dependencies {
+             implementation(libs.compose.uiToolingPreview)
++            implementation(libs.ktor.client.okhttp)
+         }
+         commonMain.dependencies {
+             implementation(libs.compose.runtime)
+@@ -47,6 +47,25 @@
+             implementation(libs.androidx.lifecycle.runtimeCompose)
++
++            // Navigation
++            implementation(libs.androidx.navigation.compose)
++
++            // Ktor
++            implementation(libs.ktor.client.core)
++            implementation(libs.ktor.client.content.negotiation)
++            implementation(libs.ktor.serialization.kotlinx.json)
++
++            // Koin
++            implementation(libs.koin.core)
++            implementation(libs.koin.compose)
++            implementation(libs.koin.compose.viewmodel)
++
++            // Serialization
++            implementation(libs.kotlinx.serialization.json)
++        }
++        val iosMain by getting {
++            dependencies {
++                implementation(libs.ktor.client.darwin)
++            }
+         }
+         commonTest.dependencies {
